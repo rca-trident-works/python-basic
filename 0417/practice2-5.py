@@ -10,4 +10,4 @@ num = int(num)
 num = str(num)
 
 # (debug) Print the message if the conversion is successful
-print('Reached End of the program without errors!')
+print('Reached End of the program without errors!, finally:', num, ' as ', type(num))
