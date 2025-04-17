@@ -13,7 +13,7 @@ ans.append(splitted[2].capitalize())
 ans.append(" " + splitted[0].lower() + " ")
 
 # 3 (Pick target char from string)
-ans.append(splitted[0][0].upper() + splitted[3][0:].upper() + splitted[3][0].upper())
+ans.append((splitted[0][0] + splitted[3][0:] + splitted[3][0]).upper())
 
 
 print(ans)
