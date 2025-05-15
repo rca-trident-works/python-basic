@@ -60,9 +60,11 @@ def validate(input_val):
 def main():
     while True:
         input_val = input("都道府県を入力してください: ")
-        if validate(input_val) == 1:
+
+        result = validate(input_val)
+        if result == 1:
             break
-        elif validate(input_val) == 2:
+        elif result == 2:
             print("都道府県まで入力してください")
             continue
         else:
@@ -72,6 +74,7 @@ def main():
                 print(f"{input_val}の番号は{pref_code}")
             else:
                 print(f"{input_val}県の県コードは見つかりませんでした")
+
 
 if __name__ == "__main__":
     main()
