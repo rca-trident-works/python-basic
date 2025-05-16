@@ -16,3 +16,28 @@ def string2int(s):
         # If conversion fails, return 0
         return 0
 
+def test_string2int():
+    # Test cases
+    test_cases = [
+        ("123", 123),
+        ("-123", -123),
+        ("0", 0),
+        ("abc", 0),
+        ("", 0),
+        (None, None),
+        (123, 123),  # Non-string input
+    ]
+
+    for input_str, expected in test_cases:
+        result = string2int(input_str)
+        if result == expected:
+            print(f"✅️ Passed!: {input_str} -> Got: {result}")
+        else:
+            print(f"❌️ Failed!: {input_str} -> Expected: {expected}, Got: {result}")
+
+def main():
+    # Run the test function
+    test_string2int()
+
+if __name__ == "__main__":
+    main()
