@@ -10,8 +10,6 @@ def test_combine_list():
     """
     Test the combine_list function.
     """
-    # エラーを吐くことをテストする必要がある場合、該当エラーオブジェクトをexpectに指定する
-    # Test cases リストではないものを渡すとエラーになることを確認する
     test_cases = [
         ([1, 2, 3], [4, 5, 6], [1, 2, 3, 4, 5, 6]),
         ([], [], []),
