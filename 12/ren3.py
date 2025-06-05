@@ -4,7 +4,6 @@ import os
 path = "./word.txt"
 
 def load_words():
-    # ファイルが存在するなら読み込む
     if os.path.exists(path):
         with open(path, 'r', encoding='utf-8') as file:
             words = file.read().splitlines()
