@@ -11,7 +11,6 @@ def load_words():
     else:
         return []
 
-
 def main():
     words = load_words()
 
