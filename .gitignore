@@ -1,2 +1,5 @@
 # Ignore __pycache__ directories recursively
 __pycache__/
+
+# 12/ren2.py
+word.txt
