@@ -35,8 +35,5 @@ def main():
         else:
             words.append(scan_word)
 
-
-
-
 if __name__ == "__main__":
     main()
