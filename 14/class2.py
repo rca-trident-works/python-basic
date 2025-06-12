@@ -15,3 +15,16 @@ print(obj2.value)
 v = getattr(obj2, 'value')
 
 print(v)
+
+print('-' * 10)
+
+obj2.print_value()
+
+f0 = obj2.print_value
+fo()
+
+f1 = getattr(obj2, 'print_value')
+f1()
+
+f2 = getattr(obj2, 'print_value')()
+f2
