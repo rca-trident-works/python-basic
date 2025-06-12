@@ -19,7 +19,7 @@ class Woman(Human):
         self.sex = '女'
 
     def say_sex(self) -> None:
-        print(f'性別は{self.sex}です。')
+        print(f'性別は{self.sex}性です。')
 
 class Man(Human):
     def __init__(self, name, birthday) -> None:
@@ -27,7 +27,7 @@ class Man(Human):
         self.sex = '男'
 
     def say_sex(self) -> None:
-        print(f'性別は{self.sex}です。')
+        print(f'性別は{self.sex}性です。')
 
 # main
 h1 = Woman('吉村', '2000-01-01')
