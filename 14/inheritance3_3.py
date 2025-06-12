@@ -17,10 +17,6 @@ class Human(HumanBase):
     def say_sex(self) -> None:
         print(f"性別は{self.sex}性です。")
 
-    def __init__(self, name, birthday, sex) -> Non:
-        super().__init__(name)
-    self.birthday
-
 class Woman(Human):
     def __init__(self, name, birthday) -> None:
         super().__init__(name, birthday, '女')
