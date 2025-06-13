@@ -7,5 +7,4 @@ class Customer(Person):
         self.company_name = company_name
 
     def show(self):
-        # return f"{super().show()}\n\tid:{self.company_id} 会社名:{self.company_name}"
         print(f"氏名: {self.full_name}\n\tid:{self.company_id} 会社名:{self.company_name}")
