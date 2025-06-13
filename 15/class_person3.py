@@ -12,4 +12,4 @@ class Person:
         return f"{self.last_name}{self.first_name}"
 
     def show(self):
-        return f"氏名: {self.full_name}"
+        print(f"氏名: {self.full_name}")
