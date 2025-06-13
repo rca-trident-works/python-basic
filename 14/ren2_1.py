@@ -6,6 +6,7 @@ class Counter:
         return self
 
     def __next__(self):
+        value = self.count
         self.count += 1
         return self.count
 
