@@ -11,6 +11,7 @@ class Shape:
 
 class Triangle(Shape):
     def __init__(self, base=1, height=1):
+        super().__init__()
         self.base = base
         self.height = height
 
@@ -22,6 +23,7 @@ class Triangle(Shape):
 
 class Rectangle(Shape):
     def __init__(self, width=1, height=1):
+        super().__init__()
         self.width = width
         self.height = height
 
