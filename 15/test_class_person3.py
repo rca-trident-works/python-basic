@@ -9,6 +9,9 @@ from class_person3 import Person
         ("太郎", "山田", "氏名: 山田太郎"),
     ]
 )
-def test_full_name(first_name, last_name, expected):
+def test_full_name(capsys, first_name, last_name, expected):
     p = Person(first_name, last_name)
-    assert p.show() == expected
+    p.show()
+    captured = capsys.readouterr()
+    assert captured.out.strip() == expected
+
