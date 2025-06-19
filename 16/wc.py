@@ -28,13 +28,8 @@ def print_results(file_paths, lines_results, words_results, bytes_results):
     item_count = len(file_paths)
 
     if item_count > 1:
-        # 最終行に合計を追加
-        total_lines = sum(lines_results)
-        total_words = sum(words_results)
-        total_bytes = sum(bytes_results)
-        lines_results.append(total_lines)
-        words_results.append(total_words)
-        bytes_results.append(total_bytes)
+        for array in (lines_results, words_results, bytes_results):
+            array.append(sum(array))
 
         file_paths.append("total")
 
