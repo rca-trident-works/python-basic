@@ -54,10 +54,11 @@ def print_results(file_paths, lines_results, words_results, bytes_results):
         print(f"{lines_results[i]:>{width}} {words_results[i]:>{width}} {bytes_results[i]:>{width}} {file_paths[i]}")
 
 def solve_width(lines_results, words_results, bytes_results):
-    lines_width = max(len(str(item)) for item in lines_results)
-    words_width = max(len(str(item)) for item in words_results)
-    bytes_width = max(len(str(item)) for item in bytes_results)
-    return max(lines_width, words_width, bytes_width)
+    return max(
+        max(len(str(item)) for item in lines_results),
+        max(len(str(item)) for item in words_results),
+        max(len(str(item)) for item in bytes_results)
+    )
 
 def get_file_stats(file_path):
     """Get the number of lines, words, and bytes in a file."""
