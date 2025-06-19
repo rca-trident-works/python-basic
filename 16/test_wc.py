@@ -1,3 +1,5 @@
+# TODO: add tests for output format
+
 import pytest
 import random
 import shutil
@@ -77,3 +79,20 @@ def test_wc_command_with_multiple_files(file_names, expected_lines, expected_wor
     assert total_line[1] == str(expected_total_words)
     assert total_line[2] == str(expected_total_bytes)
 
+def test_wc_command_with_nonexistent_file():
+    """Test wc command with a nonexistent file."""
+    # make wc.py path by modulepath
+    module_path = os.path.dirname(os.path.abspath(__file__))
+    filepath = os.path.join(module_path, 'wc.py')
+    result = subprocess.run(['python', filepath, 'nonexistent_file.txt'], capture_output=True, text=True)
+    assert result.returncode != 0
+    assert "No such file or directory" in result.stdout
+
+def test_wc_command_with_directory():
+    """Test wc command with a directory."""
+    # make wc.py path by modulepath
+    module_path = os.path.dirname(os.path.abspath(__file__))
+    filepath = os.path.join(module_path, 'wc.py')
+    result = subprocess.run(['python', filepath, 'wc_test_root'], capture_output=True, text=True)
+    assert result.returncode != 0
+    assert "Is a directory" in result.stdout
