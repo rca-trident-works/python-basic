@@ -10,14 +10,22 @@ def main():
     lines_results = []
     words_results = []
     bytes_results = []
-    file_paths = sys.argv[1:]
+    input_paths = sys.argv[1:]
+
+    file_paths = []
+
+    # Collect file paths from command line arguments
+    for i, path in enumerate(input_paths):
+        if os.path.isdir(path):
+            print(f"{path}: Is a directory (Currently not supported)")
+            continue
+        elif not os.path.isfile(path):
+            print(f"{path}: Not a regular file (Currently not supported)")
+            continue
+        else:
+            file_paths.append(path)
+
     for file_path in file_paths:
-        if not os.path.exists(file_path):
-            print(f"{file_path}: No such file or directory")
-            continue
-        elif os.path.isdir(file_path):
-            print(f"{file_path}: Is a directory (Currently not supported)")
-            continue
         num_lines, num_words, num_bytes = get_file_stats(file_path)
         lines_results.append(num_lines)
         words_results.append(num_words)
