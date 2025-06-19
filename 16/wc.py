@@ -16,7 +16,10 @@ def main():
 
     # Collect file paths from command line arguments
     for i, path in enumerate(input_paths):
-        if os.path.isdir(path):
+        if not os.path.exists(path):
+            print(f"{path}: No such file or directory")
+            continue
+        elif os.path.isdir(path):
             print(f"{path}: Is a directory (Currently not supported)")
             continue
         elif not os.path.isfile(path):
