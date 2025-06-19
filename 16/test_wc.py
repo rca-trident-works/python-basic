@@ -9,8 +9,6 @@ import sys
 
 def setup_test_environment():
     # テストに使うディレクトリとファイルを作成
-    
-    # rootディレクトリ作成
     if not os.path.exists('wc_test_root'):
         os.makedirs('wc_test_root')
 
@@ -18,7 +16,6 @@ def setup_test_environment():
         for i in range(5):
             with open(f'wc_test_root/file_{i}.txt', 'w') as f:
                 f.write(f'This is file {i}\n')
-
         for i in range(3):
             with open(f'wc_test_root/file_multi{i}.txt', 'w') as f:
                 f.write(f'This\nfile\nhas\nmultiple\nlines\n{i}\n')
@@ -27,7 +24,6 @@ def teardown_test_environment():
     # テスト後に作成したディレクトリとファイルを削除
     if os.path.exists('wc_test_root'):
         shutil.rmtree('wc_test_root')
-
 
 @pytest.fixture(scope='module', autouse=True)
 def manage_test_environment():
