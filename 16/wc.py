@@ -12,8 +12,11 @@ def main():
     bytes_results = []
     file_paths = sys.argv[1:]
     for file_path in file_paths:
-        if not os.path.isfile(file_path):
+        if not os.path.exists(file_path):
             print(f"{file_path}: No such file or directory")
+            continue
+        elif os.path.isdir(file_path):
+            print(f"{file_path}: Is a directory (Currently not supported)")
             continue
         num_lines, num_words, num_bytes = get_file_stats(file_path)
         lines_results.append(num_lines)
