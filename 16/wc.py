@@ -54,7 +54,7 @@ def print_results(file_paths, lines_results, words_results, bytes_results):
 
     max_width = max(lines_width, words_width, bytes_width)
 
-    lines_width = max(max_width, lines_width + 1)
+    lines_width = max_width
     words_width = max_width
     bytes_width = max_width
 
