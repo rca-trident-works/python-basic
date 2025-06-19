@@ -48,22 +48,16 @@ def print_results(file_paths, lines_results, words_results, bytes_results):
         # Adjust item count to include the total row
         item_count += 1
 
-    lines_width = get_max_width(lines_results)
-    words_width = get_max_width(words_results)
-    bytes_width = get_max_width(bytes_results)
-
-    max_width = max(lines_width, words_width, bytes_width)
-
-    lines_width = max_width
-    words_width = max_width
-    bytes_width = max_width
+        width = solve_width(lines_results, words_results, bytes_results)
 
     for i in range(item_count):
-        print(f"{lines_results[i]:>{lines_width}} {words_results[i]:>{words_width}} {bytes_results[i]:>{bytes_width}} {file_paths[i]}")
+        print(f"{lines_results[i]:>{width}} {words_results[i]:>{width}} {bytes_results[i]:>{width}} {file_paths[i]}")
 
-def get_max_width(array):
-    """Calculate the width of each column based on the longest item in the array."""
-    return max(len(str(item)) for item in array)
+def solve_width(lines_results, words_results, bytes_results):
+    lines_width = max(len(str(item)) for item in lines_results)
+    words_width = max(len(str(item)) for item in words_results)
+    bytes_width = max(len(str(item)) for item in bytes_results)
+    return max(lines_width, words_width, bytes_width)
 
 def get_file_stats(file_path):
     """Get the number of lines, words, and bytes in a file."""
