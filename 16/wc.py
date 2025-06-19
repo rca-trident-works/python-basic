@@ -48,7 +48,7 @@ def print_results(file_paths, lines_results, words_results, bytes_results):
         # Adjust item count to include the total row
         item_count += 1
 
-        width = solve_width(lines_results, words_results, bytes_results)
+    width = solve_width(lines_results, words_results, bytes_results)
 
     for i in range(item_count):
         print(f"{lines_results[i]:>{width}} {words_results[i]:>{width}} {bytes_results[i]:>{width}} {file_paths[i]}")
