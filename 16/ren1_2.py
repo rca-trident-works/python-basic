@@ -9,9 +9,9 @@ def main():
     if os.path.exists(input_directory):
         print(f"ディレクトリ '{input_directory}' はすでに存在します。")
         return
-    if input_directory.startswith('/'):
-        print("絶対パスは使用できません。相対パスを指定してください。")
-        return
+    # if input_directory.startswith('/'):
+    #     print("絶対パスは使用できません。相対パスを指定してください。")
+    #     return
 
     try:
         os.makedirs(input_directory)
