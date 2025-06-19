@@ -36,24 +36,16 @@ def print_results(file_paths, lines_results, words_results, bytes_results):
         # Adjust item count to include the total row
         item_count += 1
 
-    lines_width = calculate_column_widths(lines_results)
-    words_width = calculate_column_widths(words_results)
-    bytes_width = calculate_column_widths(bytes_results)
+    lines_width = get_max_width(lines_results) + 1 # なぜか最初の列は4文字に繰り上げないっぽい？
+    words_width = max(get_max_width(words_results), 4)
+    bytes_width = max(get_max_width(bytes_results), 4)
 
     for i in range(item_count):
         print(f"{lines_results[i]:>{lines_width}} {words_results[i]:>{words_width}} {bytes_results[i]:>{bytes_width}} {file_paths[i]}")
 
-
-def calculate_column_widths(array):
+def get_max_width(array):
     """Calculate the width of each column based on the longest item in the array."""
-    length = 0;
-    max_length = max(len(str(item)) for item in array)
-    if max_length <= 4:
-        length = 4
-    else:
-        length = max_length
-
-    return length + 1 # 1 is for the space between columns
+    return max(len(str(item)) for item in array)
 
 def get_file_stats(file_path):
     """Get the number of lines, words, and bytes in a file."""
