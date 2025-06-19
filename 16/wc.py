@@ -49,15 +49,11 @@ def print_results(file_paths, lines_results, words_results, bytes_results):
     words_width = get_max_width(words_results)
     bytes_width = get_max_width(bytes_results)
 
-    if (lines_width < 4 and words_width < 4 and bytes_width < 4):
-        lines_width += 1
-        # 全部が3桁未満の場合は3桁に揃えられるっぽい？
-        words_width = 3
-        bytes_width = 3
-    else:
-        lines_width += 1
-        words_width = max(words_width, 4) + 1
-        bytes_width = max(bytes_width, 4) + 1
+    max_width = max(lines_width, words_width, bytes_width)
+
+    lines_width = max(max_width, lines_width + 1)
+    words_width = max_width
+    bytes_width = max_width
 
     for i in range(item_count):
         print(f"{lines_results[i]:>{lines_width}} {words_results[i]:>{words_width}} {bytes_results[i]:>{bytes_width}} {file_paths[i]}")
