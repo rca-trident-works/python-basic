@@ -7,23 +7,50 @@ def main():
         # TODO: Print usage message
         sys.exit(1)
 
-    # 単ファイル, 複数ファイル指定に対応
-    total_lines = 0
-    total_words = 0
-    tital_bytes = 0
+    lines_results = []
+    words_results = []
+    bytes_results = []
     file_paths = sys.argv[1:]
     for file_path in file_paths:
         if not os.path.isfile(file_path):
             print(f"{file_path}: No such file or directory")
             continue
         num_lines, num_words, num_bytes = get_file_stats(file_path)
-        # 2個以上ならtotalを集計
-        if len(file_paths) > 1:
-            total_lines += num_lines
-            total_words += num_words
-            tital_bytes += num_bytes
+        lines_results.append(num_lines)
+        words_results.append(num_words)
+        bytes_results.append(num_bytes)
 
-        # print(f"{num_lines:>5} {num_words:>5} {num_bytes:>5} {file_path}")
+    print_results(file_paths, lines_results, words_results, bytes_results)
+
+# Utils
+def print_results(file_paths, lines_results, words_results, bytes_results):
+    """Print the results in a formatted table."""
+    lines_width = calculate_column_widths(lines_results)
+    words_width = calculate_column_widths(words_results)
+    bytes_width = calculate_column_widths(bytes_results)
+    
+    item_count = len(file_paths)
+
+    for i in range(item_count):
+        # 右寄せで表示
+        print(f"{lines_results[i]:>{lines_width}} {words_results[i]:>{words_width}} {bytes_results[i]:>{bytes_width}} {file_paths[i]}")
+
+    if item_count > 1:
+        total_lines = sum(lines_results)
+        total_words = sum(words_results)
+        total_bytes = sum(bytes_results)
+        prinf(f"{total_lines:>{lines_width}} {total_words:>{words_width}} {total_bytes:>{bytes_width}} total")
+
+def calculate_column_widths(array):
+    """Calculate the width of each column based on the longest item in the array."""
+    length = 0;
+    max_length = max(len(str(item)) for item in array)
+    if max_length <= 4:
+        length = 4
+    else:
+        length = max_length
+
+    return length + 1 # 1 is for the space between columns
 
 def get_file_stats(file_path):
     """Get the number of lines, words, and bytes in a file."""
