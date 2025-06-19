@@ -1,7 +1,9 @@
 import pytest
 import random
 import shutil
+import subprocess
 import os
+import sys
 
 def setup_test_environment():
     # テストに使うディレクトリとファイルを作成
@@ -32,13 +34,46 @@ def manage_test_environment():
     teardown_test_environment()
 
 @pytest.mark.parametrize(
-    "file_name, expected_output",
+    "file_name, expected_lines, expected_words, expected_bytes",
     [
-        ("wc_test_root/file_0.txt", "1 5 23 wc_test_root/file_0.txt"),
-        ("wc_test_root/file_multi0.txt", "6 30 150 wc_test_root/file_multi0.txt"),
+        ("wc_test_root/file_1.txt", 1, 4, 15),
+        ("wc_test_root/file_multi1.txt", 6, 6, 31),
     ]
 )
-def test_wc_command_with_single_file(file_name, expected_output):
-    pass
+def test_wc_command_with_single_file(file_name, expected_lines, expected_words, expected_bytes):
+    """Test wc command with a single file."""
+    # make wc.py path by modulepath
+    module_path = os.path.dirname(os.path.abspath(__file__))
+    filepath = os.path.join(module_path, 'wc.py')
+    result = subprocess.run(['python', filepath, file_name], capture_output=True, text=True)
+    assert result.returncode == 0
+    output = result.stdout.strip()
+    lines, words, bytes_, filename = output.split()
 
+
+@pytest.mark.parametrize(
+    "file_names, expected_lines, expected_words, expected_bytes, expected_total_lines, expected_total_words, expected_total_bytes",
+    [
+        (["wc_test_root/file_0.txt", "wc_test_root/file_1.txt"], [1, 1], [4, 4], [15, 15], 2, 8, 30),
+        (["wc_test_root/file_multi0.txt", "wc_test_root/file_multi1.txt"], [6, 6], [6, 6], [31, 31], 12, 12, 62),
+        (["wc_test_root/file_0.txt", "wc_test_root/file_multi0.txt"], [1, 6], [4, 6], [15, 31], 7, 10, 46),
+    ]
+)
+def test_wc_command_with_multiple_files(file_names, expected_lines, expected_words, expected_bytes, expected_total_lines, expected_total_words, expected_total_bytes):
+    """Test wc command with multiple files."""
+    # make wc.py path by modulepath
+    module_path = os.path.dirname(os.path.abspath(__file__))
+    filepath = os.path.join(module_path, 'wc.py')
+    result = subprocess.run(['python', filepath] + file_names, capture_output=True, text=True)
+    assert result.returncode == 0
+    output = result.stdout.strip().splitlines()
+    for i, line in enumerate(output[:-1]):
+        lines, words, bytes_, filename = line.split()
+        assert int(lines) == expected_lines[i]
+        assert int(words) == expected_words[i]
+        assert int(bytes_) == expected_bytes[i]
+    total_line = output[-1].split()
+    assert total_line[0] == str(expected_total_lines)
+    assert total_line[1] == str(expected_total_words)
+    assert total_line[2] == str(expected_total_bytes)
 
