@@ -1,5 +1,3 @@
-# TODO: add tests for output format
-
 import pytest
 import random
 import shutil
