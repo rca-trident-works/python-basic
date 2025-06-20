@@ -1,3 +1,6 @@
+# 拡張テスト
+# - wc.pyの出力とシステムのwcコマンドの出力を比較する
+
 import pytest
 import random
 import shutil
