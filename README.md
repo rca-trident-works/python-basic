@@ -1,7 +1,9 @@
 # このリポジトリについて
 
+## 科目
 トライデントコンピュータ専門学校 3年次 Python基礎
 
+## リポジトリ固有の条件
 - `ans/`、`docs/`、`dataset/` などの配布データは講師から提供されたものであり、再配布や二次利用は禁止です。
 - それ以外の自作コードは、以下の条件で利用できます。
 
@@ -16,12 +18,11 @@
 
 ---
 
-# License (English)
-
-This repository was created for Trident College of Computer Technology, 3rd year Python basics.
-
+## Repository-specific Terms
 - Distributed data (`ans/`, `docs/`, `dataset/`, etc.) is provided by the instructor and may not be redistributed or reused.
 - All other original code in this repository (everything except distributed data) is licensed as follows:
+
+## License (English)
 
 | User | Distributed Data (`ans/`, `docs/`, `dataset/`, etc.) | Original Code (everything except distributed data) |
 |---|---|---|
