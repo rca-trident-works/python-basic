@@ -1,0 +1,28 @@
+$ wc --help
+使用法: wc [OPTION]... [FILE]...
+または: wc [OPTION]... --files0-from=F
+各 FILE の改行、単語数およびバイト数を表示します。
+FILE が複数指定された場合は行数の合計も表示します。
+FILE が指定されないか、 FILE が - の場合、 標準入力から読み込みます。
+単語は、空白類文字で区切られる、長さが 0 でない表示可能文字の列です。
+
+ファイルの指定がない場合や FILE が - の場合, 標準入力から読み込みを行います。
+
+下記のオプションを使って、何を数えて表示するかを選択できます。
+表示は常に次の順です: 改行数、単語数、文字数、バイト数、行の最大長。
+  -c, --bytes            バイト数を表示する
+  -m, --chars            文字数を表示する
+  -l, --lines            改行の数を表示する
+      --files0-from=F    入力として NULL 文字で区切られたファイル F を使用
+                           する。F が - の場合は名前を標準入力から読み込む
+  -L, --max-line-length  最も長い行の長さを表示する
+  -w, --words            単語数を表示する
+      --total=WHEN       when to print a line with total counts;
+                           WHEN can be: auto, always, only, never
+      --help        display this help and exit
+      --version     output version information and exit
+
+GNU coreutils のオンラインヘルプ: <https://www.gnu.org/software/coreutils/>
+翻訳に関するバグは <https://translationproject.org/team/ja.html> に連絡してください。
+詳細な文書 <https://www.gnu.org/software/coreutils/wc>
+(ローカルでは info '(coreutils) wc invocation' で参照可能)。
