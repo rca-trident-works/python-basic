@@ -1,66 +1,48 @@
+import collections
 import re
-import math
-
-class Point:
-    """2次元座標を管理する"""
-
-    def __init__(self, x=0.0, y=0.0):
-        self._x = x
-        self._y = y
-
-    @property
-    def position(self) -> tuple[float, float]:
-        return (self._x, self._y)
-
-    @position.setter
-    def position(self, tuple_xy: tuple[float, float]):
-        self._x, self._y = tuple_xy
+import sys
+import os
+import requests
 
 
-def length(p1: Point, p2: Point) -> float:
-    """2点間の距離・長さを求める"""
-    p1_x, p1_y = p1.position
-    p2_x, p2_y = p2.position
-    distance_squared = (p1_x - p2_x) ** 2 + (p1_y - p2_y) ** 2
-    return math.sqrt(distance_squared)
+def usage():
+    print("URLを指定してください")
+    print(f"使い方：{os.path.basename(__file__)} URL")
+    sys.exit()
 
 
-def triangle_area(a: float, b: float, c: float) -> float:
-    """ヘロンの公式を用いて、面積を計算する"""
-    s = (a + b + c) / 2.0
-    area = math.sqrt(s * (s - a) * (s - b) * (s - c))
-    return area
+# main
+if len(sys.argv) != 2:
+    usage()
+
+input_url = sys.argv[1]
+
+try:
+    response = requests.get(input_url)
+except requests.exceptions.RequestException as e:
+    print(f"リクエスト中にエラーが発生しました: {e}")
+    sys.exit(1)
+
+if response.status_code != 200:
+    print(f"指定したURLが存在しません: {input_url}")
+    sys.exit(1)
 
 
-def input_point() -> Point:
-    """ユーザが座標の入力を行う"""
-    while True:
-        str_point = input("座標を入力してください x,y=").strip()
-        m = re.match(r"^\s*(-?\d+(?:\.\d*)?)[\s,]*(-?\d+(?:\.\d*)?)\s*$", str_point)
-        if not m:
-            print("入力が正しい形式ではありません。再度入力してください。")
-            continue
-        try:
-            float_x = float(m.group(1))
-            float_y = float(m.group(2))
-        except ValueError:
-            print("数値として認識できません。再度入力してください。")
-            continue
-        print(f"入力された座標は ({float_x}, {float_y}) です。処理を続行します。")
-        return Point(float_x, float_y)
+pattern = r'"(https?://.+?)"'
 
+print(f"\n[URL]:{input_url}")
+result = re.findall(pattern, response.text)
+# 途中でinteractive modeに入る場合 exit()する
+# $ python -i filename
+# sys.exit()
+print("-=" * 10)
 
-if __name__ == "__main__":
-    # 座標の入力
-    p1 = input_point()
-    p2 = input_point()
-    p3 = input_point()
-
-    # 三辺の計算
-    length1 = length(p1, p2)
-    length2 = length(p2, p3)
-    length3 = length(p3, p1)
-
-    # 面積の計算
-    triangle = triangle_area(length1, length2, length3)
-    print(f"三角形の面積={triangle}") 
+# モジュールを使用した場合
+count_result = collections.Counter(result)
+data_count = 0
+for url, cnt in count_result.most_common():
+    print(f"{cnt} - {url}")
+    data_count += 1
+    if data_count > 10:
+        break
+print("-=" * 10)
