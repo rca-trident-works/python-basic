@@ -19,10 +19,6 @@ def main():
         print("No URLs found.")
         return
     
-    for url in urls:
-        formatted_url = format_url(url, URL_PREFIX)
-
-    # remove dup
     unique_urls = set(urls)
 
     for url in unique_urls:
@@ -52,11 +48,6 @@ def extract_urls(content):
         urls = [a['href'] for a in soup.find_all('a', href=True)]
         return urls
     return []
-
-def format_url(url, base_url):
-    if url.startswith('/'):
-        return base_url + url
-    return url
 
 if __name__ == "__main__":
     main()
