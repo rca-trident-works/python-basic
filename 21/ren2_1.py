@@ -6,14 +6,12 @@ import os
 
 URL_PREFIX = 'https://computer.trident.ac.jp'
 
-TEST_URL = 'https://www.yahoo.co.jp'
-
 def main():
     target_url = sys.argv[1] if len(sys.argv) > 1 else None
     if not target_url:
-        # usage()
-        # sys.exit(1)
-        target_url = TEST_URL
+        usage()
+        sys.exit(1)
+        # target_url = TEST_URL
 
     contents = fetch_page_content(target_url)
     urls = extract_urls(contents)
